@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: 'Nunito', sans-serif;
+
+}
+
+body {
+  height: 140%;
+  overflow-y: hidden;
+  background: radial-gradient(closest-side, #f69d3c, #fefffd, #3f87a6);
+}
+
+/* add grid container - divs */
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.tapeDeck {
+  grid-area: main;
+}
+
+.right {
+  grid-area: right;
+}
+
+footer {
+  grid-area: footer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template:
+      " header header header header "
+      " . main main right "
+      " . main main right "
+      " . main main right "
+      " . sidebar sidebar . ";
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-gap: .1em;
+
+}
+
+.grid-container>div {
+  font-size: 1em;
+}
+

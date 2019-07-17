@@ -1,0 +1,34 @@
+.projView {
+    grid-column: 2;
+    border: black 1px solid;
+    border-radius: 1rem;
+    background-color: #314f61a9;
+    color: white;
+    width: 18vw;
+    height: 40vh;
+    margin: 5vh auto;
+    padding: 1rem;
+    text-align: center;
+    position: absolute;
+}
+
+.projView td {
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    width: 8rem;
+    border: 1px whitesmoke solid;
+    border-radius: 1rem;
+    padding: .3rem;
+}
+
+.projView button {
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    border: #753939 2px outset;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #458ca8;
+    color: white;
+}
