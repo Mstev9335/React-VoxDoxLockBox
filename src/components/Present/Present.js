@@ -7,7 +7,7 @@ const Proj = props => (
   <tr>
     <td>{props.proj.proj_title}</td>
     <td>{props.proj.proj_description}</td>
-    <td>{props.proj.proj_url}</td>
+    <td>{props.proj.proj_URL}</td>
     <td>
       <Link to={'/edit/' + props.proj._id}>EDIT</Link>
     </td>

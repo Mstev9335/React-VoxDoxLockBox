@@ -15,7 +15,6 @@ const db = require('./proj.model');
 let Proj = require('./proj.model');
 
 let userInput;
-let location;
 
 // middleware
 app.use(cors());
@@ -78,9 +77,7 @@ projRoutes.route('/add').post(function (req, res) {
             console.log("Error", err);
         } if (data) {
             console.log("Upload Success", data.Location);
-            location = data.location;
-            // console.log(data);
-            // console.log(location);
+        
             let proj = new Proj({
                 proj_title: userInput.proj_title,
                 proj_description: userInput.proj_description,
