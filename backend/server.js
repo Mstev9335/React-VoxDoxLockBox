@@ -41,6 +41,8 @@ connection.once('open', function () {
     console.log("MONGO PLUG IN REAL GOOD")
 })
 
+
+// get route
 projRoutes.route('/').get(function (req, res) {
     Proj.find(function (err, projs) {
         if (err) {
@@ -51,6 +53,7 @@ projRoutes.route('/').get(function (req, res) {
     });
 });
 
+// post route to upload new file
 projRoutes.route('/add').post(function (req, res) {
 
     // amazon s3
@@ -77,33 +80,41 @@ projRoutes.route('/add').post(function (req, res) {
             console.log("Error", err);
         } if (data) {
             console.log("Upload Success", data.Location);
-        
+
             let proj = new Proj({
                 proj_title: userInput.proj_title,
                 proj_description: userInput.proj_description,
                 proj_URL: data.Location
             });
             console.log(proj);
-           
+
             proj.save()
-        .then(proj => {
-            res.status(200).json({ 'project': 'added successfully' });
-        })
-        .catch(err => {
-            res.status(400).send('adding new failed');
-        })
+                .then(proj => {
+                    res.status(200).json({ 'project': 'added successfully' });
+                })
+                .catch(err => {
+                    res.status(400).send('adding new failed');
+                })
         }
     });
 
-
 })
 
+// edit route
 projRoutes.route('/edit/:id').get(function (req, res) {
     let id = req.params.id;
     Proj.findById(id, function (err, response) {
         res.json(response);
     })
 })
+
+// delete route
+projRoutes.route('/delete/:id').get(function (req, res) {
+    res.projs.connection.query('DELETE from members where id = '+req.body.id+'', function (error, results, fields) {
+        if(error) throw error;
+        res.send(JSON.stringify(results));
+    });
+});
 
 app.use('/projs', projRoutes);
 
