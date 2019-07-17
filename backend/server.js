@@ -31,7 +31,8 @@ app.use(multer({}).any());
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-  
+    accessKeyId: "AKIATXD362LLCPJJCT67",
+    secretAccessKey: "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"
 });
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });
@@ -52,21 +53,6 @@ projRoutes.route('/').get(function (req, res) {
 });
 
 projRoutes.route('/add').post(function (req, res) {
-    // //  mongoDB
-    // console.log(req.body);
-    // let proj = new Proj({
-    //     proj_title: req.body.proj_title,
-    //     proj_description: req.body.proj_description,
-
-    // });
-    // console.log(proj);
-    // proj.save()
-    //     .then(proj => {
-    //         res.status(200).json({ 'project': 'added successfully' });
-    //     })
-    //     .catch(err => {
-    //         res.status(400).send('adding new failed');
-    //     })
 
     // amazon s3
     const s3 = new aws.S3();
@@ -93,11 +79,12 @@ projRoutes.route('/add').post(function (req, res) {
         } if (data) {
             console.log("Upload Success", data.Location);
             location = data.location;
-            console.log(location);
+            // console.log(data);
+            // console.log(location);
             let proj = new Proj({
                 proj_title: userInput.proj_title,
                 proj_description: userInput.proj_description,
-                // proj_URL: data.location
+                proj_URL: data.Location
             });
             console.log(proj);
            
