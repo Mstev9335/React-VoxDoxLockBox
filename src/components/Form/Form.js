@@ -34,7 +34,7 @@ class Form extends React.Component {
   onClickHandler = () => {
     const data = new FormData()
     data.append('file', this.state.selectedFile)
-    console.log("file: " + data.name);
+    // console.log("file: " + data.name);
     axios.post("http://localhost:2112/projs/add", data, {
       // receive two    parameter endpoint url ,form data
     })

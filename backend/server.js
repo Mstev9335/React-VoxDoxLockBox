@@ -14,19 +14,11 @@ const db = require('./proj.model');
 
 let Proj = require('./proj.model');
 
+let userInput;
 let location;
-let title;
-let desc;
 
 // middleware
-// app.use(cors());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-// app.use(fileUpload());
-
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -36,26 +28,11 @@ app.use(bodyParser.json());
 app.use(multer({}).any());
 
 
-
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'files')
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, Date.now() + '-' + file.originalname)
-//     }
-// })
-
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-    accessKeyId: "AKIATXD362LLCPJJCT67",
-    secretAccessKey: "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"
+  
 });
-
-// multer
-// var upload = multer({ storage: storage }).single('file');
-
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });
 const connection = mongoose.connection;
@@ -75,36 +52,31 @@ projRoutes.route('/').get(function (req, res) {
 });
 
 projRoutes.route('/add').post(function (req, res) {
-    //  mongoDB
-    let proj = new Proj(req.body);
-    proj.save()
-        .then(proj => {
-            res.status(200).json({ 'project': 'added successfully' });
-        })
-        .catch(err => {
-            res.status(400).send('adding new failed');
-        })
+    // //  mongoDB
+    // console.log(req.body);
+    // let proj = new Proj({
+    //     proj_title: req.body.proj_title,
+    //     proj_description: req.body.proj_description,
+
+    // });
+    // console.log(proj);
+    // proj.save()
+    //     .then(proj => {
+    //         res.status(200).json({ 'project': 'added successfully' });
+    //     })
+    //     .catch(err => {
+    //         res.status(400).send('adding new failed');
+    //     })
 
     // amazon s3
     const s3 = new aws.S3();
 
-
-    // upload(req, res, function (err) {
-
-    // console.log(title);
-    console.log(req.files[0]);
-
-    // ----------------------------------------------
-    // get file
-    // let buffer = req.files.file.data;
-
-    // // get file name
-    // let fName = req.files.file.name;
-    // console.log(fName);
+    userInput = req.body;
+    // console.log(userInput);
 
     let file = req.files[0];
     let test = file.buffer;
-        console.log(file);
+
     // bucket parameters
     let params = {
         Bucket: 'voxdox',
@@ -120,23 +92,22 @@ projRoutes.route('/add').post(function (req, res) {
             console.log("Error", err);
         } if (data) {
             console.log("Upload Success", data.Location);
-            // console.log(data);
-            // //  //  mongoDB
-            // console.log(req.body);
-            // let proj = new Proj({
-            //     proj_title: req.body.proj_title,
-            //     proj_description: req.body.proj_description,
-            //     proj_URL: data.location
-            // });
-            // console.log(proj);
-            // proj.save()
-            //     .then(proj => {
-            //         res.status(200).json({ 'project': 'added successfully' });
-            //     })
-            //     .catch(err => {
-            //         res.status(400).send('adding new failed');
-            //     })
-
+            location = data.location;
+            console.log(location);
+            let proj = new Proj({
+                proj_title: userInput.proj_title,
+                proj_description: userInput.proj_description,
+                // proj_URL: data.location
+            });
+            console.log(proj);
+           
+            proj.save()
+        .then(proj => {
+            res.status(200).json({ 'project': 'added successfully' });
+        })
+        .catch(err => {
+            res.status(400).send('adding new failed');
+        })
         }
     });
 
