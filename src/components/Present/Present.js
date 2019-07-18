@@ -12,8 +12,10 @@ const Proj = props => (
       <Link to={'/edit/' + props.proj._id}>EDIT</Link>
     </td> */}
     <td>
-      <Link to={'/delete/:id' + props.proj._id}>Delete</Link>
-      
+    <button className="selectBtn" value={props.proj.proj_URL} type="submit">Select</button> 
+    </td>
+    <td>
+    <button className="deleteBtn" type="submit" >Delete</button> 
     </td>
     
   </tr>
@@ -23,14 +25,28 @@ class Present extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {projs: []};
-
+    this.state = {
+      projs: [],
+      btnVal: ''
+    }
   }
+
+  // fileSelect = event => {
+  //   // console.log(event.target.files[0]);
+  //   this.setState({
+  //     btnVal: "testing",
+     
+  //   })
+
+  // }
 
   componentDidMount() {
     axios.get('http://localhost:2112/projs/')
         .then(response => {
-          this.setState({projs: response.data});
+          this.setState({
+            projs: response.data,
+            btnVal: response.data.proj_URL
+          });
         })
         .catch(function (err) {
           console.log(err);

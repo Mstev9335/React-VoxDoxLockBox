@@ -15,6 +15,7 @@ const db = require('./proj.model');
 let Proj = require('./proj.model');
 
 let userInput;
+let location;
 
 // middleware
 app.use(cors());
@@ -30,8 +31,7 @@ app.use(multer({}).any());
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-    accessKeyId: "AKIATXD362LLCPJJCT67",
-    secretAccessKey: "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"
+ 
 });
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });
@@ -40,6 +40,8 @@ const connection = mongoose.connection;
 connection.once('open', function () {
     console.log("MONGO PLUG IN REAL GOOD")
 })
+
+
 
 
 // get route
@@ -80,6 +82,9 @@ projRoutes.route('/add').post(function (req, res) {
             console.log("Error", err);
         } if (data) {
             console.log("Upload Success", data.Location);
+            // data.Location is the url
+            location = data.Location;
+            console.log(location);
 
             let proj = new Proj({
                 proj_title: userInput.proj_title,
@@ -110,10 +115,10 @@ projRoutes.route('/edit/:id').get(function (req, res) {
 
 // delete route
 projRoutes.route('/delete/:id').get(function (req, res) {
-    res.projs.connection.query('DELETE from members where id = '+req.body.id+'', function (error, results, fields) {
-        if(error) throw error;
-        res.send(JSON.stringify(results));
-    });
+    let id = req.params.id;
+    db.projs.collection.deleteOne({_id : id}, (err, item) => {
+        console.log(item)
+      })
 });
 
 app.use('/projs', projRoutes);
