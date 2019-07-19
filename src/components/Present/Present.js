@@ -7,17 +7,13 @@ const Proj = props => (
   <tr>
     <td>{props.proj.proj_title}</td>
     <td>{props.proj.proj_description}</td>
-    <td>{props.proj.proj_URL}</td>
-    {/* <td>
+    <td>{props.proj.proj_url}</td>
+    <td>
       <Link to={'/edit/' + props.proj._id}>EDIT</Link>
-    </td> */}
-    <td>
-    <button className="selectBtn" value={props.proj.proj_URL} type="submit">Select</button> 
     </td>
     <td>
-    <button className="deleteBtn" type="submit" >Delete</button> 
+      <button value={props.proj.proj_URL} onClick={this.onClickfn}>Select</button>
     </td>
-    
   </tr>
 )
 
@@ -25,44 +21,47 @@ class Present extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      projs: [],
-      btnVal: ''
-    }
+    this.state = { projs: [] };
+
   }
-
-  // fileSelect = event => {
-  //   // console.log(event.target.files[0]);
-  //   this.setState({
-  //     btnVal: "testing",
-     
-  //   })
-
-  // }
 
   componentDidMount() {
     axios.get('http://localhost:2112/projs/')
-        .then(response => {
-          this.setState({
-            projs: response.data,
-            btnVal: response.data.proj_URL
-          });
-        })
-        .catch(function (err) {
-          console.log(err);
-        })
+      .then(response => {
+        this.setState({ projs: response.data });
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+  }
+
+  // this.onClick = this.onClick.bind(this);
+  onClickfn() {
+    this.setState({
+      source: this.props.proj.proj_URL
+    })
   }
 
   projList() {
-    return this.state.projs.map(function(currentProj, i) {
-      return <Proj proj={currentProj} key={i} />
+    return this.state.projs.map(function (currentProj, i) {
+      return (
+      
+          <Proj proj={currentProj} key={i} />
+        
+        
+
+      )
+
+
     })
   }
+
 
   render() {
     return (
       <div className="projView">
         <h3>Projects</h3>
+
         <table>
           <thead>
             <tr>
@@ -72,7 +71,7 @@ class Present extends React.Component {
             </tr>
           </thead>
           <tbody>
-            { this.projList() }
+            {this.projList()}
           </tbody>
         </table>
       </div>
@@ -80,4 +79,4 @@ class Present extends React.Component {
   }
 }
 
-  export default Present;
+export default Present;

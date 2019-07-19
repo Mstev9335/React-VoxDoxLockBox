@@ -13,8 +13,9 @@ class Header extends React.Component {
             alt={"VOXDOXLogo"}
         /> 
       <div className="content">
-        <Form />
-        <Present /> 
+          {/* passing state to children so present.js and player.js can both access it */}
+        <Form  />
+        <Present onUpdate={this.props.onUpdate} /> 
       </div>
     </div>
     </div>
