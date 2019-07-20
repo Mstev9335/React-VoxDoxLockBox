@@ -2,6 +2,9 @@ import React from 'react';
 import "./Present.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ReactTable from 'react-table'
+
+
 
 const Proj = props => (
   <tr>
@@ -12,7 +15,13 @@ const Proj = props => (
       <Link to={'/edit/' + props.proj._id}>EDIT</Link>
     </td>
     <td>
-      <button value={props.proj.proj_URL} onClick={this.onClickfn}>Select</button>
+      <button value={props.proj.proj_URL} onClick={
+        function getFile(){
+       
+        console.log(props.proj.proj_URL);
+      this.setState({source: props.proj.proj_URL})
+      }}
+      >Select</button>
     </td>
   </tr>
 )
@@ -21,7 +30,10 @@ class Present extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { projs: [] };
+    this.state = { 
+      projs: [],
+      source: ''
+     };
 
   }
 
@@ -36,32 +48,23 @@ class Present extends React.Component {
   }
 
   // this.onClick = this.onClick.bind(this);
-  onClickfn() {
-    this.setState({
-      source: this.props.proj.proj_URL
-    })
-  }
+
 
   projList() {
     return this.state.projs.map(function (currentProj, i) {
-      return (
-      
-          <Proj proj={currentProj} key={i} />
+      return ( <Proj proj={currentProj} key={i} />)
         
-        
-
-      )
-
-
     })
   }
 
 
   render() {
+
     return (
+
+
       <div className="projView">
         <h3>Projects</h3>
-
         <table>
           <thead>
             <tr>
@@ -72,6 +75,7 @@ class Present extends React.Component {
           </thead>
           <tbody>
             {this.projList()}
+
           </tbody>
         </table>
       </div>
