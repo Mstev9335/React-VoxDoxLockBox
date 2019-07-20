@@ -31,12 +31,18 @@ app.use(multer({}).any());
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-
+    accessKeyId: process.env.accessKeyId,
+    secretAccessKey: process.env.secretAccessKey
 });
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });
-const connection = mongoose.connection;
 
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/projects";
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+});
+const connection = mongoose.connection;
 connection.once('open', function () {
     console.log("MONGO PLUG IN REAL GOOD")
 })
