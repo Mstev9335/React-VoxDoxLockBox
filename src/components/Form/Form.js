@@ -110,7 +110,7 @@ class Form extends React.Component {
           </div>
           <div className="row">
             <label>
-              <h3>description</h3>
+              <h3>notes</h3>
             </label>
             <input type="text"
               name="description"

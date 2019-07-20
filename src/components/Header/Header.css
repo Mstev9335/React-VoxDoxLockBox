@@ -20,4 +20,9 @@
   
   .logoWrapper svg {
     width: 16rem;
+    
+  }
+
+  .content {
+    margin: 14vh 17.5vw auto 17.5vw;
   }

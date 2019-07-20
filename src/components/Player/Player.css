@@ -1,20 +1,34 @@
 .player {
-    margin: 20px 0;
-    background: rgba(0, 0, 0, 0.774);
-    border-radius: .5rem;
-    width: 100%;
-    height: 50px;
-    color: whitesmoke;
-    position: relative;
+    max-width: 46rem;
+    border: 5px inset rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 0;
+    padding-bottom: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .controls {
-    float: left;
+    display: flex;
+    position: relative;
+    padding: 2px;
+    bottom: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.controls>* {
+    flex: 1;
+}
+
+.controls > h2 {
+    font-size: 2em;
+    color: rgba(199, 199, 199, 0.822);
 }
 
 .controls > a {
     text-decoration: none;
-    height: 50px;
     box-sizing: border-box;
     padding: 15px 15px;
     float: left;
@@ -24,41 +38,31 @@
 .controls > a:hover {
     background-color: rgb(192, 104, 21);
     cursor: pointer;
+    border-radius: 1em;
 }
 
 .progress {
-    position: absolute;
-    height: 33%;
-    width: 60%;
-    left: 30%;
-    top: 33%;
-    bottom: 33%;
-    background: black;
-    box-sizing: border-box;
-    border-radius: .4rem;
-    padding: 0 5px;
+    flex: 10;
+    position: relative;
+    margin: 1px;
+    display: flex;
+    flex-basis: 100%;
+    height: 2rem;
+    background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
 .progress > .bar {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    /* position: absolute; */
     width: 100%;
     border-radius: .2rem;
-    bottom: 5px;
+    height: 1.9rem;
     background: black;
 }
 
 .progress > .bar > div {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    background: white;
+    background-color: white;
+    height: 1.8rem;
+    margin: 2px;
 }
 
-.time {
-    color: white;
-}

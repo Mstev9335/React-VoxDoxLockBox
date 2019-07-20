@@ -31,7 +31,7 @@ app.use(multer({}).any());
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-   
+
 });
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });
