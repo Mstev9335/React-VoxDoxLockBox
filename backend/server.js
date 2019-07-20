@@ -31,8 +31,7 @@ app.use(multer({}).any());
 // amazon s3 config
 dotenv.config();
 aws.config.update({
-    accessKeyId: "AKIATXD362LLOJSDEGE6",
-    secretAccessKey: "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"
+   
 });
 
 mongoose.connect('mongodb://localhost:27017/projects', { useNewUrlParser: true });

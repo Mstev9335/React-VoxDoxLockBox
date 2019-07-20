@@ -5,7 +5,7 @@ import axios from 'axios';
 import ReactTable from 'react-table'
 
 
-
+let url;
 const Proj = props => (
   <tr>
     <td>{props.proj.proj_title}</td>
@@ -17,25 +17,45 @@ const Proj = props => (
     <td>
       <button value={props.proj.proj_URL} onClick={
         function getFile(){
-       
-        console.log(props.proj.proj_URL);
-      this.setState({source: props.proj.proj_URL})
+       url = props.proj.proj_URL;
+        console.log(url);
+      // this.setState({source: props.proj.proj_URL})
+      return url;
+      // onChange={.handleUrlChange}
       }}
       >Select</button>
     </td>
   </tr>
 )
-
+console.log(url);
 class Present extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = { 
       projs: [],
-      source: ''
+      selectedUrl: url
      };
 
   }
+
+//   handleUrlChange = () => {
+//     // var fileUrl = this.state.selectedUrl;
+//     var fileUrl = "https://voxdox.s3.us-east-2.amazonaws.com/Immigrant+Song+(2007+Remaster).mp3";
+//     this.props.onSelectLanguage({selectedUrl: fileUrl});   
+//     // this.props.onSelectLanguage(fileUrl);   
+       
+// }
+// buttonClick=()=>{
+//   this.props.onSelectedUrl(url);
+// }
+// handleLangChange: function (e) {
+//   var lang = this.state.selectedLanguage;
+//   var code = this.state.selectedCode;
+//   this.props.onSelectLanguage({selectedLanguage: lang});   
+//   this.props.onSelectLanguage({selectedCode: code});           
+// }
+
 
   componentDidMount() {
     axios.get('http://localhost:2112/projs/')
@@ -62,7 +82,7 @@ class Present extends React.Component {
 
     return (
 
-
+     
       <div className="projView">
         <h3>Projects</h3>
         <table>
@@ -76,6 +96,8 @@ class Present extends React.Component {
           <tbody>
             {this.projList()}
 
+{/* <button onClick={this.buttonClick}>Put</button> */}
+{/* <button onClick={this.props.data(this.state.selectedUrl)}>Click me</button><span>{this.state.selectedUrl}</span> */}
           </tbody>
         </table>
       </div>
