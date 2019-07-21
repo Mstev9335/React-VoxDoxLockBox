@@ -17,6 +17,7 @@ This is react-based version of the previous VoxDoxLockBox application that allow
 * Monoose
 * Heroku
 * JawsDb
+* Node
 * aws-sdk npm package to access the Amazon S3 storage
 * multer npm package to get information on the file that is being uploaded
 
