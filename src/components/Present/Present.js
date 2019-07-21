@@ -33,7 +33,7 @@ class Present extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/projs/')
+    axios.get('/')
         .then(response => {
           this.setState({projs: response.data});
         })
