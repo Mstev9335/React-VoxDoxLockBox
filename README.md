@@ -18,7 +18,7 @@ This is react-based version of the previous VoxDoxLockBox application that allow
 * Heroku
 * JawsDb
 * aws-sdk npm package to access the Amazon S3 storage
-* express-fileupload npm package to get information on the file that is being uploaded
+* multer npm package to get information on the file that is being uploaded
 
 ### Deployed on Heroku: [VoxDoxLockBox](https://damp-sea-97566.herokuapp.com/)
 
