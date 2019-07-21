@@ -35,7 +35,7 @@ class Form extends React.Component {
     const data = new FormData()
     data.append('file', this.state.selectedFile)
     console.log("file: " + data);
-    axios.post("/add", data, {
+    axios.post("/projs/add", data, {
       // receive two    parameter endpoint url ,form data
     })
       .then(res => { // then print response status
@@ -80,7 +80,7 @@ class Form extends React.Component {
       proj_url: this.state.proj_url
     };
 
-    axios.post('/add', newProj)
+    axios.post('/projs/add', newProj)
       .then(res => console.log(res.data));
 
     this.setState({
