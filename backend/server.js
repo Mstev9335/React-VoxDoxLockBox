@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const projRoutes = express.Router();
-const PORT = 2112;
+const PORT = process.env.PORT || 2112;
+
 const fileUpload = require("express-fileupload");
 var multer = require('multer')
 const aws = require('aws-sdk');
@@ -35,14 +36,14 @@ aws.config.update({
     secretAccessKey: process.env.secretAccessKey
 });
 
-
-
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// Connect to Mongo 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/projects";
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true
 });
+
 const connection = mongoose.connection;
+
 connection.once('open', function () {
     console.log("MONGO PLUG IN REAL GOOD")
 })
